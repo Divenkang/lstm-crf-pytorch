@@ -24,7 +24,7 @@ class data():
         self.idx.sort(key = lambda x: -len(xw[x]))
         xc = [xc[i] for i in self.idx]
         xw = [xw[i] for i in self.idx]
-        lens = [len(x) for x in xw]
+        lens = [len(x) for x in (self.xw if HRE else xw)]
         return xc, xw, lens
 
     def unsort(self):
