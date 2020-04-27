@@ -14,7 +14,14 @@ unzip brown.zip
 python3 brown2ptb.py
 ```
 
-3. Split the data into training, test and validation sets and run `prepare.py` to make CSV and index files.
+3. Modify the following settings in `parameters.py` for a sequence labelling task.
+
+```
+UNIT = "word"
+TASK = None
+```
+
+4. Split the data into training, test and validation sets and run `prepare.py` to make CSV and index files.
 
 ```
 shuf brown.tagged.merged.uniq.ptb > data
@@ -24,13 +31,13 @@ tail +2001 data > train
 python3 prepare.py train
 ```
 
-4. Train your model. You can also modify the hyperparameters in `parameters.py`.
+5. Train your model. You can also modify the hyperparameters in `parameters.py`.
 
 ```
 python3 train.py model train.char_to_idx train.word_to_idx train.tag_to_idx train.csv valid 100
 ```
 
-5. Predict and evaluate your model.
+6. Predict and evaluate your model.
 
 ```
 python3 predict.py model.epoch100 train.char_to_idx train.word_to_idx train.tag_to_idx test
