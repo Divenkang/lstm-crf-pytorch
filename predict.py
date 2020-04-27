@@ -1,5 +1,6 @@
 from model import *
 from utils import *
+from dataloader import *
 
 def load_model():
     cti = load_tkn_to_idx(sys.argv[2]) # char_to_idx
@@ -14,9 +15,9 @@ def run_model(model, itt, data):
     with torch.no_grad():
         model.eval()
         for batch in data.split():
-            batch.sort()
-            xc, xw = data.tensor(batch.xc, batch.xw, batch.lens)
-            y1 = model.decode(xc, xw, batch.lens)
+            xc, xw, lens = batch.sort()
+            xc, xw = data.tensor(xc, xw, lens)
+            y1 = model.decode(xc, xw, lens)
             batch.y1 = [[itt[i] for i in x] for x in y1]
             batch.unsort()
             for x0, y0, y1 in zip(batch.x0, batch.y0, batch.y1):
@@ -41,7 +42,7 @@ def predict(filename, model, cti, wti, itt):
             x1 = tokenize(x0)
             xc = [[cti[c] if c in cti else UNK_IDX for c in w] for w in x1]
             xw = [wti[w] if w in wti else UNK_IDX for w in x1]
-            data.append_item(x0 = x0, xc = xc, xw = xw, y0 = y0)
+            data.append_item(x0, x1, xc, xw, y0)
         data.append_row()
     data.strip()
     return run_model(model, itt, data)

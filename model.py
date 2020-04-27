@@ -18,11 +18,11 @@ class rnn_crf(nn.Module):
         score = self.crf.score(h, y0, mask)
         return torch.mean(Z - score) # NLL loss
 
-    def decode(self, xc, xw, doc_lens): # for inference
-        self.rnn.batch_size = len(doc_lens) if HRE else xw.size(0)
-        self.crf.batch_size = len(doc_lens) if HRE else xw.size(0)
+    def decode(self, xc, xw, lens): # for inference
+        self.rnn.batch_size = len(lens)
+        self.crf.batch_size = len(lens)
         if HRE:
-            mask = Tensor([[1] * x + [PAD_IDX] * (doc_lens[0] - x) for x in doc_lens])
+            mask = Tensor([[1] * x + [PAD_IDX] * (lens[0] - x) for x in lens])
         else:
             mask = xw.gt(PAD_IDX).float()
         h = self.rnn(xc, xw, mask)
