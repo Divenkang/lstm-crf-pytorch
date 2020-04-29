@@ -10,7 +10,7 @@ def load_data():
     wti = load_tkn_to_idx(sys.argv[3]) # word_to_idx
     itt = load_idx_to_tkn(sys.argv[4]) # idx_to_tkn
     print("loading %s..." % sys.argv[5])
-    with open(sys.argv[5], "r") as fo:
+    with open(sys.argv[5]) as fo:
         text = fo.read().strip().split("\n" * (HRE + 1))
     for block in text:
         for line in block.split("\n"):
