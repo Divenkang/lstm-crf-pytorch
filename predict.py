@@ -11,7 +11,7 @@ def load_model():
     load_checkpoint(sys.argv[1], model)
     return model, cti, wti, itt
 
-def run_model(model, itt, data):
+def run_model(model, data, itt):
     with torch.no_grad():
         model.eval()
         for batch in data.split():
@@ -45,7 +45,7 @@ def predict(filename, model, cti, wti, itt):
             data.append_item(x0, x1, xc, xw, y0)
         data.append_row()
     data.strip()
-    return run_model(model, itt, data)
+    return run_model(model, data, itt)
 
 if __name__ == "__main__":
     if len(sys.argv) != 6:
