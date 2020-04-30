@@ -38,4 +38,4 @@ randn = lambda *x: torch.randn(*x).cuda() if CUDA else torch.randn
 zeros = lambda *x: torch.zeros(*x).cuda() if CUDA else torch.zeros
 
 KEEP_IDX = False # use the existing indices when adding more training data
-NUM_DIGITS = 4 # number of digits to print
+NUM_DIGITS = 4 # number of decimal places to print
