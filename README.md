@@ -5,10 +5,10 @@ A minimal PyTorch implementation of bidirectional LSTM-CRF for sequence labellin
 Supported features:
 - Mini-batch training with CUDA
 - Lookup, CNNs, RNNs and/or self-attention in the embedding layer
+- Hierarchical recurrent encoding (HRE)
 - A PyTorch implementation of conditional random field (CRF)
 - Vectorized computation of CRF loss
 - Vectorized Viterbi decoding
-- Hierarchical recurrent encoder (HRE)
 
 ## Usage
 
