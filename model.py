@@ -34,7 +34,7 @@ class rnn(nn.Module):
         self.batch_size = 0
 
         # architecture
-        self.embed = embed(cti_size, wti_size, HRE)
+        self.embed = embed(EMBED, cti_size, wti_size, HRE)
         self.rnn = getattr(nn, RNN_TYPE)(
             input_size = EMBED_SIZE,
             hidden_size = HIDDEN_SIZE // NUM_DIRS,
