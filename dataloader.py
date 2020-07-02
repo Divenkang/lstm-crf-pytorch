@@ -81,10 +81,10 @@ class dataloader():
                 if sos:
                     _bc.append([[]])
                     _bw.append([])
-                _bc.extend(self.flatten(bc[i:i + j]))
-                _bw.extend(self.flatten(bw[i:i + j]))
-                _bc.extend([[[]] for _ in range(d_len - j)])
-                _bw.extend([[] for _ in range(d_len - j)])
+                _bc += self.flatten(bc[i:i + j])
+                _bw += self.flatten(bw[i:i + j])
+                _bc += [[[]] for _ in range(d_len - j)]
+                _bw += [[] for _ in range(d_len - j)]
                 if eos:
                     _bc.append([[]])
                     _bw.append([])
