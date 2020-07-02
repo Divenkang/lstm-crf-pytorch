@@ -15,7 +15,7 @@ def run_model(model, data, itt):
     with torch.no_grad():
         model.eval()
         for batch in data.split():
-            xc, xw, lens = batch.sort()
+            xc, xw, _, lens = batch.sort()
             xc, xw = data.tensor(xc, xw, lens)
             y1 = model.decode(xc, xw, lens)
             batch.y1 = [[itt[i] for i in x] for x in y1]
@@ -38,7 +38,7 @@ def predict(filename, model, cti, wti, itt):
             elif re.match("[^\t]+\t\S+$", x0): # sentence \t label
                 x0, *y0 = x0.split("\t")
             else: # no ground truth provided
-                y0 = []
+                y0 = [""]
             x1 = tokenize(x0)
             xc = [[cti[c] if c in cti else UNK_IDX for c in w] for w in x1]
             xw = [wti[w] if w in wti else UNK_IDX for w in x1]
