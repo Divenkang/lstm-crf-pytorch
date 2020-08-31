@@ -45,7 +45,7 @@ def convert(tkn):
             if x == "MD": tags.append("AUX")
             if x == "NIL": tags.append("UNK")
             if re.match("NNS?$", x): tags.append("NN") # noun
-            if re.match("NPS?$", x): tags.append("NN") # proper noun
+            if re.match("NPS?$", x): tags.append("NNP") # proper noun
             if re.match("NRS?$", x): tags.append("NN") # adverbial noun
             if re.match("P(N|P[LOS]S?)$", x): tags.append("PRO")
             if re.match("QLP?$", x): tags.append("RB")
